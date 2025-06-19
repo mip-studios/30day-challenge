@@ -23,24 +23,33 @@
       margin-bottom: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       position: relative;
+      overflow: hidden;
     }
     .day.completed {
       background-color: #d4edda;
       text-decoration: line-through;
     }
     .checkbox {
-      position: absolute;
-      top: 15px;
-      right: 15px;
+      float: right;
+      margin-left: 10px;
       transform: scale(1.4);
     }
-    @media (max-width: 600px) {
-      body {
-        padding: 8px;
-      }
-      .day {
-        font-size: 1em;
-      }
+    .timer {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .timer-button {
+      margin-left: 10px;
+      padding: 4px 8px;
+      font-size: 0.9em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .timer-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -84,6 +93,19 @@
 
     const container = document.getElementById('challenge');
 
+    function createTimer(duration, display) {
+      let time = duration;
+      display.textContent = `⏳ ${time}s`;
+      const interval = setInterval(() => {
+        time--;
+        display.textContent = `⏳ ${time}s`;
+        if (time <= 0) {
+          clearInterval(interval);
+          display.textContent = "✅ Klaar!";
+        }
+      }, 1000);
+    }
+
     days.forEach((d) => {
       const div = document.createElement('div');
       div.className = 'day';
@@ -104,12 +126,23 @@
         content += 'Rustdag 🧘‍♀️';
       } else {
         content += `${d.plank}s planken, ${d.crunches} crunches, ${d.legRaises} leg raises, ${d.squats} squats`;
+
+        // Voeg timerknop toe
+        if (d.plank) {
+          const id = `timer-${d.dag}`;
+          content += ` <button class="timer-button" onclick="startPlank(${d.plank}, '${id}')">Start timer</button> <span class="timer" id="${id}"></span>`;
+        }
       }
 
       div.innerHTML = content;
       div.appendChild(checkbox);
       container.appendChild(div);
     });
+
+    function startPlank(seconden, id) {
+      const display = document.getElementById(id);
+      createTimer(seconden, display);
+    }
   </script>
 </body>
 </html>
