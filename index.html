@@ -14,7 +14,14 @@
     h1 {
       text-align: center;
       font-size: 1.6em;
-      margin: 20px 0;
+      margin: 20px 0 5px;
+    }
+    .warning {
+      text-align: center;
+      font-size: 0.95em;
+      color: #b33;
+      margin-bottom: 20px;
+      font-style: italic;
     }
     .day {
       background: white;
@@ -48,7 +55,14 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    .timer-button:hover, .wake-button:hover {
+    .wake-button {
+      background-color: #fff799;
+      color: #333;
+    }
+    .wake-button:hover {
+      background-color: #ffef66;
+    }
+    .timer-button:hover {
       background-color: #0056b3;
     }
     .compliment {
@@ -60,7 +74,11 @@
 </head>
 <body>
   <h1>30 Dagen Challenge</h1>
+  <div class="warning">⚠️ Dit is een testsite – niet bedoeld om serieus thuis te doen of als medisch advies.</div>
   <div id="challenge"></div>
+
+  <!-- Geluidje -->
+  <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
   <script>
     const compliments = [
@@ -86,16 +104,18 @@
     const days = [...Array(30)].map((_, i) => {
       const d = i + 1;
       if ([5, 10, 15, 20, 25].includes(d)) return { dag: d, rust: true };
-      const plank = [20,30,30,35,40,45,45,50,60,60,70,80,80,90,90,105,105,105,120,120,135,135,150,165,180][i - (d > 5) - (d > 10) - (d > 15) - (d > 20) - (d > 25)];
-      const crunches = [15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135][i - (d > 5) - (d > 10) - (d > 15) - (d > 20) - (d > 25)];
-      const legRaises = [5,8,10,12,15,20,30,30,33,40,42,42,42,45,48,50,52,55,58,60,60,62,62,62,65][i - (d > 5) - (d > 10) - (d > 15) - (d > 20) - (d > 25)];
-      const squats = [30,30,35,40,45,50,50,55,55,55,60,60,65,65,70,70,75,75,75,80,80,80,85,85,90][i - (d > 5) - (d > 10) - (d > 15) - (d > 20) - (d > 25)];
+      const adjust = [5,10,15,20,25].filter(v => d > v).length;
+      const idx = i - adjust;
+      const plank = [20,30,30,35,40,45,45,50,60,60,70,80,80,90,90,105,105,105,120,120,135,135,150,165,180][idx];
+      const crunches = [15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135][idx];
+      const legRaises = [5,8,10,12,15,20,30,30,33,40,42,42,42,45,48,50,52,55,58,60,60,62,62,62,65][idx];
+      const squats = [30,30,35,40,45,50,50,55,55,55,60,60,65,65,70,70,75,75,75,80,80,80,85,85,90][idx];
       return { dag: d, plank, crunches, legRaises, squats };
     });
 
     const container = document.getElementById('challenge');
-    const wakeLocks = {}; // Per dag
-    const timers = {};    // Per dag
+    const wakeLocks = {};
+    const timers = {};
 
     async function toggleWakeLock(dag, button) {
       if (wakeLocks[dag]) {
@@ -115,6 +135,7 @@
     function startPlank(dag, seconden, id) {
       if (timers[dag]) clearInterval(timers[dag].interval);
       const display = document.getElementById(id);
+      const beep = document.getElementById("beep-sound");
       let time = seconden;
       display.textContent = `⏳ ${time}s`;
       const interval = setInterval(() => {
@@ -123,6 +144,7 @@
         if (time <= 0) {
           clearInterval(interval);
           display.textContent = "✅ Klaar!";
+          beep.play();
           timers[dag] = null;
         }
       }, 1000);
@@ -142,11 +164,6 @@
       const complimentDiv = document.createElement('div');
       complimentDiv.className = 'compliment';
 
-      const wakeBtn = document.createElement('button');
-      wakeBtn.className = 'wake-button';
-      wakeBtn.textContent = "Scherm aan";
-      wakeBtn.onclick = () => toggleWakeLock(d.dag, wakeBtn);
-
       checkbox.onchange = async () => {
         localStorage.setItem('dag' + d.dag, checkbox.checked);
         div.classList.toggle('completed', checkbox.checked);
@@ -156,7 +173,8 @@
         if (wakeLocks[d.dag]) {
           await wakeLocks[d.dag].release();
           wakeLocks[d.dag] = null;
-          wakeBtn.textContent = "Scherm aan";
+          const wakeButton = div.querySelector(".wake-button");
+          if (wakeButton) wakeButton.textContent = "Scherm aan";
         }
       };
 
@@ -176,12 +194,20 @@
       }
 
       div.innerHTML = content;
-      div.appendChild(wakeBtn);
+
+      if (!d.rust) {
+        const wakeBtn = document.createElement("button");
+        wakeBtn.className = "wake-button";
+        wakeBtn.textContent = "Scherm aan";
+        wakeBtn.onclick = () => toggleWakeLock(d.dag, wakeBtn);
+        div.appendChild(wakeBtn);
+      }
+
       div.appendChild(checkbox);
       div.appendChild(complimentDiv);
 
       if (isChecked) {
-        div.classList.add('completed');
+        div.classList.add("completed");
         complimentDiv.textContent = compliments[Math.floor(Math.random() * compliments.length)];
       }
 
