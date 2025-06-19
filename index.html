@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="30 Days">
-  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAf5JREFUaEPtmO1RAzEMhGMXYBTgKOAowCnAKMAowCnAKMAowCiAAuL5JHvptD5I0qT0Sb5kS2p/d/b3fQBeALsAewB7gB3ACeAB8AY4AzwDngAssAecAS7AExiB/xN4AuwD7AGeATOAPcAG8AR4ArQAfh8ALgeQ1wHkegA5fQE8fQEkfQEsfQFYfQFYfQHkegA5XQEEfQEEfQGcfQFcfQEkfQEkfQGcfQHkegA5nQEEfQFEfQFEfQHcfQFkfQEkfQHcfQGkegA5/QE8fQEkfQFcfQHEegA5vQGcfQHEegA5vQGcfQHEegA5XQEEfQFEfQGEegA5vQGcfQHEegA5vQGEegA5vQGcfQHEegA5XQEEfQFEfQGEegA5vQGcfQHEegA5vQGkegA5/QFkfQGcfQHEegA5/QGcfQHEegA5/QGcfQHEegA5vQGEegA5vQGcfQHEegA5vQGEegA5vQGcfQHEegA5XQEEfQFEfQGkegA5vQGcfQHEegA5XQGkfQEkfQHkegA5/QGcfQFkfQGcfQHEegA5vQGcfQGkfQGEegA5vQGkfQEkfQHkegA5vQGcfQHEegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QFk/gD+8Y+4A4kX/zG/3wA2gBfAG+AC8AX4A/yr/A+MAFYAzwBngBvAF+AN8AY4A3wBngCfgT/K5wDYP8wD4A3wBjgD/Gv8DwACWAKbAQ4A5wBngDPAucAd4A5wB3gB3gDvgD/An+F/iP88a8A0wB3gD3AHOAO8AewB7gB3gDnAHeAPcAY7APgDJL/8B63AZz2VsjBwAAAAASUVORK5CYII=">
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAf5JREFUaEPtmO1RAzEMhGMXYBTgKOAowCnAKMAowCnAKMAowCiAAuL5JHvptD5I0qT0Sb5kS2p/d/b3fQBeALsAewB7gB3ACeAB8AY4AzwDngAssAecAS7AExiB/xN4AuwD7AGeATOAPcAG8AR4ArQAfh8ALgeQ1wHkegA5fQE8fQEkfQEsfQFYfQFYfQHkegA5XQEEfQEEfQGcfQFcfQEkfQEkfQGcfQHkegA5nQEEfQFEfQFEfQHcfQFkfQEkfQHcfQGkegA5/QE8fQEkfQFcfQHEegA5vQGcfQHEegA5vQGcfQHEegA5XQEEfQFEfQGEegA5vQGcfQHEegA5vQGEegA5vQGcfQHEegA5XQEEfQFEfQGEegA5vQGcfQHEegA5vQGkegA5/QFkfQGcfQHEegA5/QGcfQHEegA5/QGcfQHEegA5vQGEegA5vQGcfQHEegA5vQGEegA5vQGcfQHEegA5XQEEfQFEfQGkegA5vQGcfQHEegA5XQGkfQEkfQHkegA5/QGcfQFkfQGcfQHEegA5vQGcfQGkfQGEegA5vQGkfQEkfQHkegA5vQGcfQHEegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QGkegA5/QFk/gD+8Y+4A4kX/zG/3wA2gBfAG+AC8AX4A/yr/A+MAFYAzwBngBvAF+AN8AY4A3wBngCfgT/K5wDYP8wD4A3wBjgD/Gv8DwACWAKbAQ4A5wBngDPAucAd4A5wB3gB3gDvgD/An+F/iP88a8A0wB3gD3AHOAO8AewB7gB3gDnAHeAPcAY7APgDJL/8B63AZz2VsjBwAAAAASUVORK5CYII=">
 
   <style>
     :root {
@@ -59,14 +59,27 @@
     #progress-text { text-align: center; font-weight: bold; margin-bottom: 20px; display: block; }
     footer { text-align: center; margin: 30px 0 20px; font-size: 0.8em; color: var(--text-color); opacity: 0.6; }
 
-    /* === NIEUW: Kalender Styling === */
+    /* Statische content styling */
+    .intro-text { text-align: center; font-size: 0.95em; max-width: 600px; margin: 0 auto 20px; color: var(--text-color); opacity: 0.8; }
+    .warning { text-align: center; font-size: 0.95em; color: #b33; margin-bottom: 5px; font-style: italic; }
+    .video-section, .feedback-section { background: var(--card-bg-color); border-radius: 12px; padding: 20px; margin: 20px auto; box-shadow: var(--card-shadow); max-width: 600px; text-align: center; }
+    .button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+    .styled-button { display: inline-block; color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; transition: background-color 0.2s; border: none; font-size: 1em; cursor: pointer; }
+    .video-button { background-color: var(--button-primary-bg); }
+    .video-button:hover { background-color: var(--button-primary-hover-bg); }
+    .feedback-button { background-color: var(--button-primary-bg); }
+    .feedback-button:hover { background-color: var(--button-primary-hover-bg); }
+    .reset-button { background-color: var(--button-danger-bg); }
+    .reset-button:hover { background-color: var(--button-danger-hover-bg); }
+
+    /* Kalender Styling */
     #calendar-view { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 10px; padding: 10px; max-width: 500px; margin: 20px auto; }
     .calendar-day { display: flex; justify-content: center; align-items: center; background: var(--card-bg-color); color: var(--text-color); text-decoration: none; font-weight: bold; font-size: 1.5em; height: 60px; border-radius: 10px; box-shadow: var(--card-shadow); transition: transform 0.2s, background-color 0.2s; }
     .calendar-day:hover { transform: scale(1.05); }
     .calendar-day.completed { background-color: var(--completed-day-color); color: white; }
     .calendar-day.rest-day { font-style: italic; opacity: 0.7; }
     
-    /* === NIEUW: Detail Pagina Styling === */
+    /* Detail Pagina Styling */
     .day-detail-card { background: var(--card-bg-color); border-radius: 12px; padding: 15px 20px; margin: 10px auto; box-shadow: var(--card-shadow); max-width: 600px; }
     .day-detail-card.completed { background-color: var(--completed-bg-color); }
     .day-content { line-height: 1.6; }
@@ -90,7 +103,28 @@
   <div id="progress-text">0% voltooid</div>
 
   <main id="app-container">
-      <div id="calendar-view"></div>
+      <div id="main-view-content">
+          <div class="warning">⚠️ Dit is een testsite – niet bedoeld om serieus thuis te doen of als medisch advies.</div>
+          <p class="intro-text">Deze site komt het best tot zijn recht op een iPhone.<br>Gebruik de knop “Start workout modus” om je scherm wakker te houden tijdens het sporten.</p>
+          <div class="video-section">
+              <p>Je weet het vast wel, maar mocht je je techniek toch nog verder willen verbeteren, hierbij een voorbeeld hoe je dat kunt doen 😉</p>
+              <div class="button-group">
+                  <a href="https://m.youtube.com/watch?v=pSHjTRCQxIw" target="_blank" class="styled-button video-button">Planken</a>
+                  <a href="https://youtu.be/Xyd_fa5zoEU?feature=shared" target="_blank" class="styled-button video-button">Crunches</a>
+                  <a href="https://youtu.be/JB2oyawG9KI?feature=shared" target="_blank" class="styled-button video-button">Leg Raises</a>
+                  <a href="https://youtu.be/UXJrBgI2RxA?feature=shared" target="_blank" class="styled-button video-button">Squats</a>
+              </div>
+          </div>
+          <div id="calendar-view"></div>
+          <div class="feedback-section">
+              <p>Heb je een briljant idee of wil je opnieuw beginnen?</p>
+              <div class="button-group">
+                <a href="mailto:post.master@me.com?subject=Ik%20heb%20je%2030%20dagen%20challenge%20overleefd%20en...%20%F0%9F%92%AA" class="styled-button feedback-button">Geef Feedback</a>
+                <button id="reset-btn" class="styled-button reset-button">Reset Alles</button>
+              </div>
+          </div>
+      </div>
+      
       <div id="detail-view" style="display: none;"></div>
   </main>
   
@@ -106,13 +140,12 @@
     const wakeLocks = {};
     const timers = {};
 
-    // === NIEUW: De hele navigatie- en renderlogica ===
-
+    const mainViewContent = document.getElementById('main-view-content');
     const calendarView = document.getElementById('calendar-view');
     const detailView = document.getElementById('detail-view');
 
     function renderCalendar() {
-        calendarView.innerHTML = ''; // Maak leeg voor her-renderen
+        calendarView.innerHTML = ''; 
         for (const dayData of days) {
             const dayLink = document.createElement('a');
             dayLink.href = `#day-${dayData.dag}`;
@@ -132,20 +165,18 @@
     function renderDetailView(dayNumber) {
         const dayData = days[dayNumber - 1];
         if (!dayData) {
-            location.hash = ''; // Terug naar kalender als dag niet bestaat
+            location.hash = ''; 
             return;
         }
 
-        detailView.innerHTML = ''; // Maak de view leeg
+        detailView.innerHTML = ''; 
         
-        // Terugknop
         const backButton = document.createElement('a');
         backButton.href = '#';
         backButton.className = 'back-button';
         backButton.innerHTML = '&larr; Terug naar overzicht';
         detailView.appendChild(backButton);
 
-        // De kaart voor de dagdetails
         const div = document.createElement('div');
         div.className = 'day-detail-card';
         div.id = 'dag-' + dayData.dag;
@@ -167,7 +198,6 @@
         contentHTML += `</div>`;
         div.innerHTML = contentHTML;
 
-        // Wake Lock knop logica
         if (!dayData.rust) {
             const wakeBtn = div.querySelector(`#wakeBtn-${dayData.dag}`);
             if(wakeBtn) {
@@ -175,7 +205,6 @@
             }
         }
 
-        // Complimenten en voltooi-knop logica
         const complimentDiv = document.createElement('div');
         complimentDiv.className = 'compliment';
         const completeBtn = document.createElement('button');
@@ -225,27 +254,27 @@
         const hash = location.hash;
         if (hash.startsWith('#day-')) {
             const dayNumber = parseInt(hash.substring(5), 10);
-            calendarView.style.display = 'none';
+            mainViewContent.style.display = 'none'; // Verberg de hoofdpagina content
             detailView.style.display = 'block';
             renderDetailView(dayNumber);
         } else {
-            calendarView.style.display = 'grid';
+            mainViewContent.style.display = 'block'; // Toon de hoofdpagina content
             detailView.style.display = 'none';
             renderCalendar();
         }
     }
     
-    // --- Overige functies ---
     function updateProgress() { let completedCount = 0; for (let i = 1; i <= 30; i++) { if (localStorage.getItem('dag' + i) === 'true') completedCount++; } const percentage = Math.round((completedCount / 30) * 100); document.getElementById('progress-bar').style.width = percentage + '%'; document.getElementById('progress-text').textContent = `${percentage}% voltooid`; }
     function handleUserName() { let userName = localStorage.getItem('userName'); if (!userName) { const introText = "Welkom bij de 30 Days Workout Challenge, goed dat je meedoet!\n\nWat is je naam?"; userName = prompt(introText, ""); if (userName && userName.toLowerCase().trim() === 'grace') { alert("Wat een mooie naam Grace, vast net zo mooi als jij ;)"); } if (userName && userName.trim() !== "") { localStorage.setItem('userName', userName); } else { userName = null; } } if (userName) { document.getElementById('welcome-message').textContent = `Zet 'm op, ${userName}!`; } }
     async function toggleWakeLock(dag, button) { if (wakeLocks[dag]) { await wakeLocks[dag].release(); wakeLocks[dag] = null; button.textContent = "Start workout modus"; button.style.backgroundColor = ''; } else { try { wakeLocks[dag] = await navigator.wakeLock.request('screen'); button.textContent = "✅ Workout modus actief"; button.style.backgroundColor = '#28a745'; wakeLocks[dag].addEventListener('release', () => { wakeLocks[dag] = null; if (button) { button.textContent = "Start workout modus"; button.style.backgroundColor = ''; } }); } catch (e) { alert("Wake lock wordt niet ondersteund door deze browser of is uitgeschakeld."); } } }
     function startPlank(dag, seconden, id) { if (timers[dag] && timers[dag].interval) clearInterval(timers[dag].interval); const display = document.getElementById(id); const beep = document.getElementById("beep-sound"); let time = seconden; display.textContent = `⏳ ${time}s`; const interval = setInterval(() => { time--; display.textContent = `⏳ ${time}s`; if (time <= 0) { clearInterval(interval); display.textContent = "✅ Klaar!"; beep.play(); timers[dag] = null; } }, 1000); timers[dag] = { interval }; }
-
+    function resetAllProgress() { if (confirm("Weet je zeker dat je alle voortgang en je naam wilt wissen? Dit kan niet ongedaan worden gemaakt.")) { localStorage.clear(); location.reload(); } }
+    
     // Initialiseer de app
+    document.getElementById('reset-btn').addEventListener('click', resetAllProgress);
     handleUserName();
     updateProgress();
     
-    // Start de router bij het laden en bij hash-wijzigingen
     window.addEventListener('hashchange', router);
     window.addEventListener('DOMContentLoaded', router);
 
