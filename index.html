@@ -11,7 +11,6 @@
   <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAyFJREFUaEPtmG1R2zAYhq9NXbQDSUcwHaQjpAN0A9kJJB1gOkA6gA5gOkA6SDqADqgTvB45EJKESBAQv/v+85xHkh9kFzZ/Z4AReAksAcvgElgDb4C/4DPwFfgGfgBPwK/gD8jP94Ed8W+1sY3WfHwI/IYDgCgA+Tx2+Jxy8JvBQXgGngK/gScQzJs/Bw4AXuK3pQDYz3YEDcBaPjCzD2BwB/wFfocAUEvJj+cD2P0AFu/gG3gP/Cs/8BjwA3AfOAGuQBA4AlwP3AfeBQ+CvxrnwCvgQ4oAz/gZ+A1oGcFzJbADfA0eA/8F8G1t6iA2wDvgT8V51sA1uG2H9/gH8x8G/i/sAR+BP8k62vJj2cDUA/y9f4BngIXgX/R5wI8gQfwLvgU/M/EtwL49oAPwPvgQ8D32j8AngLPAfcA3N44gGfgV/AccD9ZAXsYAX4F7wGvgM/x9f4D3gKvw/uAzwE8AXwAXAb+S5wGgN3uBHwBvgbvAjgL3I/ABsAE8C64F3gSOH/AD4A/wWcALkF2sQFwA3AXeA5cBd4EvgD/gI/AWeAOcBc4AnztAPgIXAUeB+5B4FPgb+AdsBG4BawBvwGngSvgGfBa4L3AvcBd4BPwN+A0cAF8BaxBF7gIvA+cAU8CrwAvgWfAO+BO4CFwBfgOuAH8Q30APAGeAT8BN4H7gN/AZ+A5cAF4CFwEfgP3gCXgSXAbeB74F3gJvAYeAu8CJwAXgW+An4BzwK/gGvAjcAF4E/ga+B58CrwJ3Ad+Bv4JfgA+B94EfgL+BD4FbgGvgFeAp8BbwCPgGfAD8DbwCPgVeA+8C1wCXgK+Bc4CrwE/AZ+Bt4G/gG+BH4AvgbuBp4GPgOeBz4CfgE+B+4GngbvAd8DPwS/BD8CfgQ+Bf4KfgL+Df4Ffgv+Af4O/g/+DPw3+B/g5+R/+f3YAn8k/08cR0LxoA/i9iLgL+j0xWA/xXkXfBf+S/8F+Hj/zR/AF4CzwXg/xXjsw/wKPAxcB14Avgc+A58CfwLPDnOjwBvgT8U5zsAQeBfcAnA9+g3cAR+Af/i13+D/wCWWwA4eQW8kAAAAABJRU5ErkJggg==">
 
   <style>
-    /* === NIEUW: CSS Variabelen voor Dark/Light Mode === */
     :root {
       --bg-color: #f2f2f2;
       --text-color: #333;
@@ -27,8 +26,9 @@
       --button-tertiary-hover-bg: #5a6268;
       --compliment-color: #2c662d;
       --link-color: #0066cc;
+      --progress-bar-bg: #e9ecef;
+      --progress-bar-fill: #007bff;
     }
-
     @media (prefers-color-scheme: dark) {
       :root {
         --bg-color: #121212;
@@ -45,9 +45,10 @@
         --button-tertiary-hover-bg: #3a4045;
         --compliment-color: #81c784;
         --link-color: #64b5f6;
+        --progress-bar-bg: #333;
+        --progress-bar-fill: #0059b3;
       }
     }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg-color);
@@ -56,139 +57,45 @@
       margin: 0;
       transition: background-color 0.3s, color 0.3s;
     }
-    h1 {
-      text-align: center;
-      font-size: 1.6em;
-      margin: 20px 0 5px;
-    }
-    .intro-text {
-        text-align: center;
-        font-size: 0.95em;
-        max-width: 600px;
-        margin: 0 auto 20px;
-        color: var(--text-color);
-        opacity: 0.8;
-    }
-    .warning {
-      text-align: center;
-      font-size: 0.95em;
-      color: #b33;
-      margin-bottom: 5px;
-      font-style: italic;
-    }
-    .day {
-      background: var(--card-bg-color);
-      border-radius: 12px;
-      padding: 15px 20px;
-      margin-bottom: 12px;
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
-      position: relative;
-      transition: background-color 0.3s;
-    }
-    .day.completed {
-      background-color: var(--completed-bg-color);
-    }
-    .day-content {
-      line-height: 1.6;
-    }
-    .timer {
-      display: inline-block;
-      margin-left: 10px;
-      font-weight: bold;
-    }
-    .action-button {
-      display: block;
-      width: 100%;
-      margin-top: 12px;
-      padding: 12px 16px;
-      font-size: 1em;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: center;
-      transition: background-color 0.2s ease, transform 0.1s ease;
-    }
-    .action-button:active {
-        transform: scale(0.98);
-    }
-    .timer-button {
-      background-color: var(--button-primary-bg);
-      color: white;
-      padding: 8px 14px;
-      font-size: 0.9em;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-left: 5px;
-      border: none;
-    }
-    .timer-button:hover {
-      background-color: var(--button-primary-hover-bg);
-    }
-    .wake-button {
-      background-color: var(--button-secondary-bg);
-      color: var(--text-color);
-    }
-    .wake-button:hover {
-      background-color: var(--button-secondary-hover-bg);
-    }
-    .complete-button {
-      background-color: var(--button-tertiary-bg);
-      color: white;
-    }
-    .complete-button:hover {
-        background-color: var(--button-tertiary-hover-bg);
-    }
-    .complete-button.done {
-        background-color: #28a745;
-    }
-    .compliment {
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(128,128,128,0.2);
-      font-style: italic;
-      color: var(--compliment-color);
-      text-align: center;
-    }
-    .compliment img {
-        max-width: 100%;
-        border-radius: 8px;
-        margin-top: 10px;
-    }
-    /* === NIEUW: Video en Feedback knoppen styling === */
-    .video-section, .feedback-section {
-        background: var(--card-bg-color);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 20px 0;
-        box-shadow: var(--card-shadow);
-        text-align: center;
-    }
-    .video-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 15px;
-    }
-    .video-button, .feedback-button {
-        display: inline-block;
-        background-color: var(--button-primary-bg);
-        color: white;
-        text-decoration: none;
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: background-color 0.2s;
-    }
-    .video-button:hover, .feedback-button:hover {
-        background-color: var(--button-primary-hover-bg);
-    }
+    h1 { text-align: center; font-size: 1.6em; margin: 5px 0 5px; }
+    h2.welcome-message { text-align: center; font-size: 1.2em; font-weight: normal; margin: 0 0 20px; }
+    .intro-text { text-align: center; font-size: 0.95em; max-width: 600px; margin: 0 auto 20px; color: var(--text-color); opacity: 0.8; }
+    .warning { text-align: center; font-size: 0.95em; color: #b33; margin-bottom: 5px; font-style: italic; }
+    .day { background: var(--card-bg-color); border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; box-shadow: var(--card-shadow); overflow: hidden; position: relative; transition: background-color 0.3s; }
+    .day.completed { background-color: var(--completed-bg-color); }
+    .day-content { line-height: 1.6; }
+    .timer { display: inline-block; margin-left: 10px; font-weight: bold; }
+    .action-button { display: block; width: 100%; margin-top: 12px; padding: 12px 16px; font-size: 1em; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-align: center; transition: background-color 0.2s ease, transform 0.1s ease; }
+    .action-button:active { transform: scale(0.98); }
+    .timer-button { background-color: var(--button-primary-bg); color: white; padding: 8px 14px; font-size: 0.9em; border-radius: 6px; cursor: pointer; margin-left: 5px; border: none; }
+    .timer-button:hover { background-color: var(--button-primary-hover-bg); }
+    .wake-button { background-color: var(--button-secondary-bg); color: var(--text-color); }
+    .wake-button:hover { background-color: var(--button-secondary-hover-bg); }
+    .complete-button { background-color: var(--button-tertiary-bg); color: white; }
+    .complete-button:hover { background-color: var(--button-tertiary-hover-bg); }
+    .complete-button.done { background-color: #28a745; }
+    .compliment { margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(128,128,128,0.2); font-style: italic; color: var(--compliment-color); text-align: center; }
+    .compliment img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
+    .video-section, .feedback-section { background: var(--card-bg-color); border-radius: 12px; padding: 20px; margin: 20px 0; box-shadow: var(--card-shadow); text-align: center; }
+    .video-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+    .video-button, .feedback-button { display: inline-block; background-color: var(--button-primary-bg); color: white; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; transition: background-color 0.2s; }
+    .video-button:hover, .feedback-button:hover { background-color: var(--button-primary-hover-bg); }
+
+    /* === NIEUW: Progress Bar Styling === */
+    #progress-container { width: 90%; max-width: 600px; margin: 15px auto 5px; background-color: var(--progress-bar-bg); border-radius: 10px; overflow: hidden; height: 20px; }
+    #progress-bar { width: 0%; height: 100%; background-color: var(--progress-bar-fill); transition: width 0.5s ease-in-out; }
+    #progress-text { text-align: center; font-weight: bold; margin-bottom: 20px; display: block; }
   </style>
 </head>
 <body>
   <h1>30 Dagen Challenge</h1>
+  <h2 class="welcome-message" id="welcome-message"></h2>
+
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="progress-text">0% voltooid</div>
+
   <div class="warning">⚠️ Dit is een testsite – niet bedoeld om serieus thuis te doen of als medisch advies.</div>
   <p class="intro-text">Deze site komt het best tot zijn recht op een iPhone.<br>Gebruik de knop “Start workout modus” om je scherm wakker te houden tijdens het sporten.</p>
 
@@ -209,49 +116,105 @@
       <a href="mailto:post.master@me.com?subject=Ik%20heb%20je%2030%20dagen%20challenge%20overleefd%20en...%20%F0%9F%92%AA" class="feedback-button">Geef Feedback</a>
   </div>
 
-
   <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
   <script>
-    const compliments = [
-      "Goed gedaan!", "Geweldig!", "Ga zo door!", "Kanjer!", "Heb je zeker vaker gedaan 😉",
-      "Jij bent een machine 🔥", "Spieren van staal 💪", "Dit doe je zeker op 1 hand?",
-      "Zelfs je spiegel heeft respect 😎", "Nu al klaar? Olympisch niveau!",
-      "Als motivatie een sport was... jij won goud 🥇", "Je matje is jaloers op je inzet",
-      "Waarschijnlijk heb je dit al in je slaap gedaan 😴", "Je trainer zou trots zijn – als je die nodig had 😜",
-      "Wist je dat deze challenge naar jou is vernoemd?", "Check je abs eens in de spiegel 🪞",
-      "Kom maar door met dat sixpack! 🍺 (de sportieve dan)"
+    // === NIEUW: Unieke complimenten per dag ===
+    // {{name}} wordt automatisch vervangen door de ingevulde naam.
+    const workoutCompliments = [
+        "Dag 1 is binnen, {{name}}! De belangrijkste stap is gezet. Klasse!", // 0
+        "Kijk jou gaan! Die inzet is nu al bewonderenswaardig.", // 1
+        "Wow, nu al? Jij bent een machine! 🔥", // 2
+        "Perfecte uitvoering, {{name}}. Je techniek wordt met de dag beter.", // 3
+        "Ga zo door! De resultaten zullen volgen, dat kan niet anders.", // 4
+        "Je bent sterker dan je denkt. Deze workout was het bewijs.", // 5
+        "Spieren van staal in de maak. 💪", // 6
+        "Je hebt dit. Elke herhaling telt, en jij maakt ze af!", // 7
+        "Zelfs je spiegel is onder de indruk. 😎", // 8
+        "Wat een doorzettingsvermogen, {{name}}! Echt top.", // 9
+        "Challenge? Welke challenge? Jij laat dit er makkelijk uitzien.", // 10
+        "Je bent al bijna op de helft! Ongelofelijk hoe snel dat gaat.", // 11
+        "Die energie! Kunnen we die op fles verkopen?", // 12
+        "Elke dag een beetje sterker. Voel je het al, {{name}}?", // 13
+        "Jouw motivatie is aanstekelijk. Ga zo door!", // 14
+        "Dit is hoe kampioenen trainen. Serieus.", // 15
+        "Je bent een inspiratie! Echt waar.", // 16
+        "Die laatste paar reps waren voor het karakter. En dat heb je, {{name}}!", // 17
+        "Je hebt de 'ik kan dit niet' fase officieel verlaten. Welkom bij de 'kijk mij eens' club.", // 18
+        "Nog maar een paar dagen te gaan! De finish is in zicht.", // 19
+        "Je hebt meer discipline dan de meeste mensen. Petje af!", // 20
+        "Fenomenaal werk, {{name}}! Bijna aan het einde van deze reis.", // 21
+        "Je lichaam zal je dankbaar zijn voor deze geweldige inzet.", // 22
+        "Morgen de allerlaatste workout! Maak je borst maar nat.", // 23
+        "De allerlaatste workout. Wat een reis, {{name}}. Maak het onvergetelijk!"  // 24
+    ];
+
+    const restDayCompliments = [
+        "Rust is net zo belangrijk als de training, {{name}}. Je lichaam bouwt nu spieren op. Goed bezig!", // 0
+        "Een rustdag is een slimme zet. Morgen kom je sterker terug!", // 1
+        "Vandaag even opladen. Je hebt het verdiend, {{name}}!", // 2
+        "Discipline is ook weten wanneer je moet rusten. Perfecte timing.", // 3
+        "Geniet van deze pauze. Je consistentie tot nu toe is indrukwekkend!" // 4
     ];
 
     const days = [...Array(30)].map((_, i) => {
       const d = i + 1;
-      if ([5, 10, 15, 20, 25].includes(d)) return { dag: d, rust: true };
-      const adjust = [5,10,15,20,25].filter(v => d > v).length;
-      const idx = i - adjust;
-      const plank = [20,30,30,35,40,45,45,50,60,60,70,80,80,90,90,105,105,105,120,120,135,135,150,165,180][idx];
-      const crunches = [15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135][idx];
-      const legRaises = [5,8,10,12,15,20,30,30,33,40,42,42,42,45,48,50,52,55,58,60,60,62,62,62,65][idx];
-      const squats = [30,30,35,40,45,50,50,55,55,55,60,60,65,65,70,70,75,75,75,80,80,80,85,85,90][idx];
-      return { dag: d, plank, crunches, legRaises, squats };
+      const restDaysBefore = [5, 10, 15, 20, 25].filter(v => d > v).length;
+      if ([5, 10, 15, 20, 25].includes(d)) {
+          const restDayIndex = [5, 10, 15, 20, 25].indexOf(d);
+          return { dag: d, rust: true, complimentIndex: restDayIndex };
+      }
+      const workoutIndex = i - restDaysBefore;
+      const plank = [20,30,30,35,40,45,45,50,60,60,70,80,80,90,90,105,105,105,120,120,135,135,150,165,180][workoutIndex];
+      const crunches = [15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135][workoutIndex];
+      const legRaises = [5,8,10,12,15,20,30,30,33,40,42,42,42,45,48,50,52,55,58,60,60,62,62,62,65][workoutIndex];
+      const squats = [30,30,35,40,45,50,50,55,55,55,60,60,65,65,70,70,75,75,75,80,80,80,85,85,90][workoutIndex];
+      return { dag: d, plank, crunches, legRaises, squats, rust: false, complimentIndex: workoutIndex };
     });
 
     const container = document.getElementById('challenge');
     const wakeLocks = {};
     const timers = {};
 
+    // === NIEUW: Functie voor voortgangsbalk ===
+    function updateProgress() {
+        let completedCount = 0;
+        for (let i = 1; i <= 30; i++) {
+            if (localStorage.getItem('dag' + i) === 'true') {
+                completedCount++;
+            }
+        }
+        const percentage = Math.round((completedCount / 30) * 100);
+        document.getElementById('progress-bar').style.width = percentage + '%';
+        document.getElementById('progress-text').textContent = `${percentage}% voltooid`;
+    }
+
+    // === NIEUW: Functie voor naam vragen en instellen ===
+    function handleUserName() {
+        let userName = localStorage.getItem('userName');
+        if (!userName) {
+            userName = prompt("Welkom! Wat is je naam?", "Sportieveling");
+            if (userName) {
+                localStorage.setItem('userName', userName);
+            }
+        }
+        if (userName) {
+            document.getElementById('welcome-message').textContent = `Zet 'm op, ${userName}!`;
+        }
+    }
+    
     async function toggleWakeLock(dag, button) {
       if (wakeLocks[dag]) {
         await wakeLocks[dag].release();
         wakeLocks[dag] = null;
         button.textContent = "Start workout modus";
-        button.style.backgroundColor = ''; // Reset to CSS variable
+        button.style.backgroundColor = '';
       } else {
         try {
           wakeLocks[dag] = await navigator.wakeLock.request('screen');
           button.textContent = "✅ Workout modus actief";
-          button.style.backgroundColor = '#28a745'; // Active green color
+          button.style.backgroundColor = '#28a745';
           wakeLocks[dag].addEventListener('release', () => {
-              // Wordt uitgevoerd als de lock wordt gereleased (bv. tab wisselen)
               wakeLocks[dag] = null;
               button.textContent = "Start workout modus";
               button.style.backgroundColor = '';
@@ -264,12 +227,10 @@
 
     function startPlank(dag, seconden, id) {
       if (timers[dag] && timers[dag].interval) clearInterval(timers[dag].interval);
-      
       const display = document.getElementById(id);
       const beep = document.getElementById("beep-sound");
       let time = seconden;
       display.textContent = `⏳ ${time}s`;
-
       const interval = setInterval(() => {
         time--;
         display.textContent = `⏳ ${time}s`;
@@ -307,12 +268,9 @@
         contentHTML += `</div>`;
         div.innerHTML = contentHTML;
 
-        // --- AANGEPAST: Knoppen worden nu hieronder toegevoegd ---
-
         const complimentDiv = document.createElement('div');
         complimentDiv.className = 'compliment';
 
-        // Knop voor Workout Modus (Wake Lock)
         if (!dayData.rust) {
             const wakeBtn = document.createElement("button");
             wakeBtn.className = "action-button wake-button";
@@ -321,33 +279,39 @@
             div.appendChild(wakeBtn);
         }
 
-        // Knop voor Voltooien
         const completeBtn = document.createElement('button');
         completeBtn.className = 'action-button complete-button';
         
         const updateButtonState = (completed) => {
+            const userName = localStorage.getItem('userName') || 'Kanjer';
+            let complimentText = '';
+
             if (completed) {
                 div.classList.add('completed');
                 completeBtn.classList.add('done');
-                completeBtn.textContent = '✅ Workout voltooid!';
-
-                // === NIEUW: Groot compliment op dag 30 ===
+                completeBtn.textContent = '✅ Voltooid!';
+                
                 if (dayData.dag === 30) {
                      complimentDiv.innerHTML = `
                         <strong>CHALLENGE VOLTOOID!</strong><br>
-                        Wat een absolute eindbaas! 30 dagen lang discipline en zweet. Je hebt het gehaald. Wees supertrots op jezelf, rust goed uit, je hebt het verdiend!
+                        Wat een absolute eindbaas! 30 dagen lang discipline en zweet. Je hebt het gehaald, ${userName}. Wees supertrots op jezelf, rust goed uit, je hebt het verdiend!
                         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2Jod2N0OHU5b3E2ZHR4ODQ2eWJxNWRjMWJsdDR4MDJsdnAyYjNsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz9axbqr1gD5oOaJy/giphy.gif" alt="Feestende The Rock">
                     `;
                 } else {
-                    complimentDiv.textContent = compliments[Math.floor(Math.random() * compliments.length)];
+                    if (dayData.rust) {
+                        complimentText = restDayCompliments[dayData.complimentIndex];
+                    } else {
+                        complimentText = workoutCompliments[dayData.complimentIndex];
+                    }
+                    complimentDiv.innerHTML = complimentText.replace(/{{name}}/g, userName);
                 }
                 complimentDiv.style.display = 'block';
 
             } else {
                 div.classList.remove('completed');
                 completeBtn.classList.remove('done');
-                completeBtn.textContent = 'Markeer als voltooid';
-                complimentDiv.textContent = '';
+                completeBtn.textContent = dayData.rust ? 'Rustdag voltooid' : 'Markeer als voltooid';
+                complimentDiv.innerHTML = '';
                 complimentDiv.style.display = 'none';
             }
         };
@@ -357,8 +321,8 @@
             const newState = !currentState;
             localStorage.setItem('dag' + dayData.dag, newState);
             updateButtonState(newState);
+            updateProgress(); // Update de voortgangsbalk
 
-            // Wake lock uitzetten als de dag wordt voltooid
             if (newState && wakeLocks[dayData.dag]) {
                 await wakeLocks[dayData.dag].release();
             }
@@ -367,13 +331,13 @@
         div.appendChild(completeBtn);
         div.appendChild(complimentDiv);
         
-        // Initiele status instellen bij laden van de pagina
         updateButtonState(isCompleted);
-
         return div;
     }
 
-    // Render alle dagen
+    // === Initialiseer de pagina ===
+    handleUserName();
+    updateProgress();
     days.forEach((d) => {
       const dayElement = renderDay(d);
       container.appendChild(dayElement);
@@ -382,3 +346,4 @@
   </script>
 </body>
 </html>
+
