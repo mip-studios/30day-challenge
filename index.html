@@ -2,88 +2,214 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <title>30 Dagen Challenge</title>
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="30 Dagen Challenge">
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAyFJREFUaEPtmG1R2zAYhq9NXbQDSUcwHaQjpAN0A9kJJB1gOkA6gA5gOkA6SDqADqgTvB45EJKESBAQv/v+85xHkh9kFzZ/Z4AReAksAcvgElgDb4C/4DPwFfgGfgBPwK/gD8jP94Ed8W+1sY3WfHwI/IYDgCgA+Tx2+Jxy8JvBQXgGngK/gScQzJs/Bw4AXuK3pQDYz3YEDcBaPjCzD2BwB/wFfocAUEvJj+cD2P0AFu/gG3gP/Cs/8BjwA3AfOAGuQBA4AlwP3AfeBQ+CvxrnwCvgQ4oAz/gZ+A1oGcFzJbADfA0eA/8F8G1t6iA2wDvgT8V51sA1uG2H9/gH8x8G/i/sAR+BP8k62vJj2cDUA/y9f4BngIXgX/R5wI8gQfwLvgU/M/EtwL49oAPwPvgQ8D32j8AngLPAfcA3N44gGfgV/AccD9ZAXsYAX4F7wGvgM/x9f4D3gKvw/uAzwE8AXwAXAb+S5wGgN3uBHwBvgbvAjgL3I/ABsAE8C64F3gSOH/AD4A/wWcALkF2sQFwA3AXeA5cBd4EvgD/gI/AWeAOcBc4AnztAPgIXAUeB+5B4FPgb+AdsBG4BawBvwGngSvgGfBa4L3AvcBd4BPwN+A0cAF8BaxBF7gIvA+cAU8CrwAvgWfAO+BO4CFwBfgOuAH8Q30APAGeAT8BN4H7gN/AZ+A5cAF4CFwEfgP3gCXgSXAbeB74F3gJvAYeAu8CJwAXgW+An4BzwK/gGvAjcAF4E/ga+B58CrwJ3Ad+Bv4JfgA+B94EfgL+BD4FbgGvgFeAp8BbwCPgGfAD8DbwCPgVeA+8C1wCXgK+Bc4CrwE/AZ+Bt4G/gG+BH4AvgbuBp4GPgOeBz4CfgE+B+4GngbvAd8DPwS/BD8CfgQ+Bf4KfgL+Df4Ffgv+Af4O/g/+DPw3+B/g5+R/+f3YAn8k/08cR0LxoA/i9iLgL+j0xWA/xXkXfBf+S/8F+Hj/zR/AF4CzwXg/xXjsw/wKPAxcB14Avgc+A58CfwLPDnOjwBvgT8U5zsAQeBfcAnA9+g3cAR+Af/i13+D/wCWWwA4eQW8kAAAAABJRU5ErkJggg==">
+
   <style>
+    /* === NIEUW: CSS Variabelen voor Dark/Light Mode === */
+    :root {
+      --bg-color: #f2f2f2;
+      --text-color: #333;
+      --card-bg-color: white;
+      --card-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      --completed-bg-color: #d4edda;
+      --completed-text-color: #155724;
+      --button-primary-bg: #007bff;
+      --button-primary-hover-bg: #0056b3;
+      --button-secondary-bg: #fff799;
+      --button-secondary-hover-bg: #ffef66;
+      --button-tertiary-bg: #6c757d;
+      --button-tertiary-hover-bg: #5a6268;
+      --compliment-color: #2c662d;
+      --link-color: #0066cc;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg-color: #1e1e1e;
+        --card-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        --completed-bg-color: #2a3d30;
+        --completed-text-color: #a7d7b6;
+        --button-primary-bg: #0059b3;
+        --button-primary-hover-bg: #00448a;
+        --button-secondary-bg: #5a5229;
+        --button-secondary-hover-bg: #706735;
+        --button-tertiary-bg: #4f565c;
+        --button-tertiary-hover-bg: #3a4045;
+        --compliment-color: #81c784;
+        --link-color: #64b5f6;
+      }
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f2f2f2;
+      background: var(--bg-color);
+      color: var(--text-color);
       padding: 10px;
       margin: 0;
+      transition: background-color 0.3s, color 0.3s;
     }
     h1 {
       text-align: center;
       font-size: 1.6em;
       margin: 20px 0 5px;
     }
+    .intro-text {
+        text-align: center;
+        font-size: 0.95em;
+        max-width: 600px;
+        margin: 0 auto 20px;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
     .warning {
       text-align: center;
       font-size: 0.95em;
       color: #b33;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
       font-style: italic;
     }
     .day {
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: var(--card-bg-color);
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin-bottom: 12px;
+      box-shadow: var(--card-shadow);
       overflow: hidden;
       position: relative;
+      transition: background-color 0.3s;
     }
     .day.completed {
-      background-color: #d4edda;
+      background-color: var(--completed-bg-color);
     }
-    .checkbox {
-      float: right;
-      margin-left: 10px;
-      transform: scale(1.4);
+    .day-content {
+      line-height: 1.6;
     }
     .timer {
       display: inline-block;
       margin-left: 10px;
       font-weight: bold;
     }
-    .timer-button, .wake-button {
-      display: inline-block;
-      margin-top: 8px;
-      margin-right: 8px;
-      padding: 10px 16px;
+    .action-button {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px 16px;
       font-size: 1em;
       font-weight: bold;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      text-align: center;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+    .action-button:active {
+        transform: scale(0.98);
     }
     .timer-button {
-      background-color: #007bff;
+      background-color: var(--button-primary-bg);
       color: white;
+      padding: 8px 14px;
+      font-size: 0.9em;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 5px;
+      border: none;
     }
     .timer-button:hover {
-      background-color: #0056b3;
+      background-color: var(--button-primary-hover-bg);
     }
     .wake-button {
-      background-color: #fff799;
-      color: #333;
+      background-color: var(--button-secondary-bg);
+      color: var(--text-color);
     }
     .wake-button:hover {
-      background-color: #ffef66;
+      background-color: var(--button-secondary-hover-bg);
+    }
+    .complete-button {
+      background-color: var(--button-tertiary-bg);
+      color: white;
+    }
+    .complete-button:hover {
+        background-color: var(--button-tertiary-hover-bg);
+    }
+    .complete-button.done {
+        background-color: #28a745;
     }
     .compliment {
-      margin-top: 10px;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(128,128,128,0.2);
       font-style: italic;
-      color: #2c662d;
+      color: var(--compliment-color);
+      text-align: center;
+    }
+    .compliment img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+    /* === NIEUW: Video en Feedback knoppen styling === */
+    .video-section, .feedback-section {
+        background: var(--card-bg-color);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: var(--card-shadow);
+        text-align: center;
+    }
+    .video-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .video-button, .feedback-button {
+        display: inline-block;
+        background-color: var(--button-primary-bg);
+        color: white;
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+    .video-button:hover, .feedback-button:hover {
+        background-color: var(--button-primary-hover-bg);
     }
   </style>
 </head>
 <body>
   <h1>30 Dagen Challenge</h1>
   <div class="warning">⚠️ Dit is een testsite – niet bedoeld om serieus thuis te doen of als medisch advies.</div>
+  <p class="intro-text">Deze site komt het best tot zijn recht op een iPhone.<br>Gebruik de knop “Start workout modus” om je scherm wakker te houden tijdens het sporten.</p>
+
+  <div class="video-section">
+      <p>Je weet het vast wel, maar mocht je je techniek toch nog verder willen verbeteren, hierbij een voorbeeld hoe je dat kunt doen 😉</p>
+      <div class="video-buttons">
+          <a href="https://www.youtube.com/watch?v=ASdvN_XMM_g" target="_blank" class="video-button">Planken</a>
+          <a href="https://www.youtube.com/watch?v=y_bg-c2sS6U" target="_blank" class="video-button">Crunches</a>
+          <a href="https://www.youtube.com/watch?v=JB2BEdGTSxs" target="_blank" class="video-button">Leg Raises</a>
+          <a href="https://www.youtube.com/watch?v=x1vIlK3c2sA" target="_blank" class="video-button">Squats</a>
+      </div>
+  </div>
+
   <div id="challenge"></div>
 
-  <!-- Geluid -->
+  <div class="feedback-section">
+      <p>Heb je de challenge overleefd en een briljant idee of opmerking? Laat het weten!</p>
+      <a href="mailto:post.master@me.com?subject=Ik%20heb%20je%2030%20dagen%20challenge%20overleefd%20en...%20%F0%9F%92%AA" class="feedback-button">Geef Feedback</a>
+  </div>
+
+
   <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
   <script>
@@ -118,22 +244,32 @@
         await wakeLocks[dag].release();
         wakeLocks[dag] = null;
         button.textContent = "Start workout modus";
+        button.style.backgroundColor = ''; // Reset to CSS variable
       } else {
         try {
           wakeLocks[dag] = await navigator.wakeLock.request('screen');
-          button.textContent = "Workout modus actief";
+          button.textContent = "✅ Workout modus actief";
+          button.style.backgroundColor = '#28a745'; // Active green color
+          wakeLocks[dag].addEventListener('release', () => {
+              // Wordt uitgevoerd als de lock wordt gereleased (bv. tab wisselen)
+              wakeLocks[dag] = null;
+              button.textContent = "Start workout modus";
+              button.style.backgroundColor = '';
+          });
         } catch (e) {
-          alert("Wake lock werkt niet in deze browser.");
+          alert("Wake lock wordt niet ondersteund door deze browser of is uitgeschakeld.");
         }
       }
     }
 
     function startPlank(dag, seconden, id) {
-      if (timers[dag]) clearInterval(timers[dag].interval);
+      if (timers[dag] && timers[dag].interval) clearInterval(timers[dag].interval);
+      
       const display = document.getElementById(id);
       const beep = document.getElementById("beep-sound");
       let time = seconden;
       display.textContent = `⏳ ${time}s`;
+
       const interval = setInterval(() => {
         time--;
         display.textContent = `⏳ ${time}s`;
@@ -147,68 +283,102 @@
       timers[dag] = { interval };
     }
 
+    function renderDay(dayData) {
+        const div = document.createElement('div');
+        div.className = 'day';
+        div.id = 'dag-' + dayData.dag;
+
+        const isCompleted = localStorage.getItem('dag' + dayData.dag) === 'true';
+
+        let contentHTML = `<div class="day-content"><strong>Dag ${dayData.dag}</strong><br>`;
+        if (dayData.rust) {
+            contentHTML += `Rustdag 🧘‍♀️`;
+        } else {
+            if (dayData.plank) {
+            const timerId = `timer-${dayData.dag}`;
+            contentHTML += `${dayData.plank}s planken 
+                <button class="timer-button" onclick="startPlank(${dayData.dag}, ${dayData.plank}, '${timerId}')">Start timer</button>
+                <span class="timer" id="${timerId}"></span><br>`;
+            }
+            contentHTML += `${dayData.crunches} crunches<br>`;
+            contentHTML += `${dayData.legRaises} leg raises<br>`;
+            contentHTML += `${dayData.squats} squats<br>`;
+        }
+        contentHTML += `</div>`;
+        div.innerHTML = contentHTML;
+
+        // --- AANGEPAST: Knoppen worden nu hieronder toegevoegd ---
+
+        const complimentDiv = document.createElement('div');
+        complimentDiv.className = 'compliment';
+
+        // Knop voor Workout Modus (Wake Lock)
+        if (!dayData.rust) {
+            const wakeBtn = document.createElement("button");
+            wakeBtn.className = "action-button wake-button";
+            wakeBtn.textContent = "Start workout modus";
+            wakeBtn.onclick = () => toggleWakeLock(dayData.dag, wakeBtn);
+            div.appendChild(wakeBtn);
+        }
+
+        // Knop voor Voltooien
+        const completeBtn = document.createElement('button');
+        completeBtn.className = 'action-button complete-button';
+        
+        const updateButtonState = (completed) => {
+            if (completed) {
+                div.classList.add('completed');
+                completeBtn.classList.add('done');
+                completeBtn.textContent = '✅ Workout voltooid!';
+
+                // === NIEUW: Groot compliment op dag 30 ===
+                if (dayData.dag === 30) {
+                     complimentDiv.innerHTML = `
+                        <strong>CHALLENGE VOLTOOID!</strong><br>
+                        Wat een absolute eindbaas! 30 dagen lang discipline en zweet. Je hebt het gehaald. Wees supertrots op jezelf, rust goed uit, je hebt het verdiend!
+                        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2Jod2N0OHU5b3E2ZHR4ODQ2eWJxNWRjMWJsdDR4MDJsdnAyYjNsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz9axbqr1gD5oOaJy/giphy.gif" alt="Feestende The Rock">
+                    `;
+                } else {
+                    complimentDiv.textContent = compliments[Math.floor(Math.random() * compliments.length)];
+                }
+                complimentDiv.style.display = 'block';
+
+            } else {
+                div.classList.remove('completed');
+                completeBtn.classList.remove('done');
+                completeBtn.textContent = 'Markeer als voltooid';
+                complimentDiv.textContent = '';
+                complimentDiv.style.display = 'none';
+            }
+        };
+
+        completeBtn.onclick = async () => {
+            const currentState = localStorage.getItem('dag' + dayData.dag) === 'true';
+            const newState = !currentState;
+            localStorage.setItem('dag' + dayData.dag, newState);
+            updateButtonState(newState);
+
+            // Wake lock uitzetten als de dag wordt voltooid
+            if (newState && wakeLocks[dayData.dag]) {
+                await wakeLocks[dayData.dag].release();
+            }
+        };
+
+        div.appendChild(completeBtn);
+        div.appendChild(complimentDiv);
+        
+        // Initiele status instellen bij laden van de pagina
+        updateButtonState(isCompleted);
+
+        return div;
+    }
+
+    // Render alle dagen
     days.forEach((d) => {
-      const div = document.createElement('div');
-      div.className = 'day';
-      const isChecked = localStorage.getItem('dag' + d.dag) === 'true';
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.className = 'checkbox';
-      checkbox.checked = isChecked;
-
-      const complimentDiv = document.createElement('div');
-      complimentDiv.className = 'compliment';
-
-      checkbox.onchange = async () => {
-        localStorage.setItem('dag' + d.dag, checkbox.checked);
-        div.classList.toggle('completed', checkbox.checked);
-        complimentDiv.textContent = checkbox.checked
-          ? compliments[Math.floor(Math.random() * compliments.length)]
-          : "";
-        if (wakeLocks[d.dag]) {
-          await wakeLocks[d.dag].release();
-          wakeLocks[d.dag] = null;
-          const wakeButton = div.querySelector(".wake-button");
-          if (wakeButton) wakeButton.textContent = "Start workout modus";
-        }
-      };
-
-      let content = `<strong>Dag ${d.dag}</strong><br>`;
-      if (d.rust) {
-        content += `Rustdag 🧘‍♀️`;
-      } else {
-        if (d.plank) {
-          const id = `timer-${d.dag}`;
-          content += `${d.plank}s planken 
-            <button class="timer-button" onclick="startPlank(${d.dag}, ${d.plank}, '${id}')">Start timer</button>
-            <span class="timer" id="${id}"></span><br>`;
-        }
-        content += `${d.crunches} crunches<br>`;
-        content += `${d.legRaises} leg raises<br>`;
-        content += `${d.squats} squats<br>`;
-      }
-
-      div.innerHTML = content;
-
-      if (!d.rust) {
-        const wakeBtn = document.createElement("button");
-        wakeBtn.className = "wake-button";
-        wakeBtn.textContent = "Start workout modus";
-        wakeBtn.onclick = () => toggleWakeLock(d.dag, wakeBtn);
-        div.appendChild(wakeBtn);
-      }
-
-      div.appendChild(checkbox);
-      div.appendChild(complimentDiv);
-
-      if (isChecked) {
-        div.classList.add("completed");
-        complimentDiv.textContent = compliments[Math.floor(Math.random() * compliments.length)];
-      }
-
-      container.appendChild(div);
+      const dayElement = renderDay(d);
+      container.appendChild(dayElement);
     });
+
   </script>
 </body>
 </html>
