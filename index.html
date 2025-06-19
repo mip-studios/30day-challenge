@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>30 Dagen Buikspier Challenge</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f2f2f2;
+      padding: 10px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.6em;
+      margin: 20px 0;
+    }
+    .day {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .day.completed {
+      background-color: #d4edda;
+      text-decoration: line-through;
+    }
+    .checkbox {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      transform: scale(1.4);
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 8px;
+      }
+      .day {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>30 Dagen Challenge</h1>
+  <div id="challenge"></div>
+
+  <script>
+    const days = [
+      {dag: 1, plank: 20, crunches: 15, legRaises: 5, squats: 30},
+      {dag: 2, plank: 30, crunches: 20, legRaises: 8, squats: 30},
+      {dag: 3, plank: 30, crunches: 25, legRaises: 10, squats: 35},
+      {dag: 4, plank: 35, crunches: 30, legRaises: 12, squats: 40},
+      {dag: 5, rust: true},
+      {dag: 6, plank: 40, crunches: 35, legRaises: 15, squats: 45},
+      {dag: 7, plank: 45, crunches: 40, legRaises: 20, squats: 50},
+      {dag: 8, plank: 45, crunches: 45, legRaises: 30, squats: 50},
+      {dag: 9, plank: 50, crunches: 50, legRaises: 30, squats: 55},
+      {dag: 10, rust: true},
+      {dag: 11, plank: 60, crunches: 55, legRaises: 33, squats: 55},
+      {dag: 12, plank: 60, crunches: 60, legRaises: 40, squats: 55},
+      {dag: 13, plank: 70, crunches: 65, legRaises: 42, squats: 60},
+      {dag: 14, plank: 80, crunches: 70, legRaises: 42, squats: 60},
+      {dag: 15, rust: true},
+      {dag: 16, plank: 80, crunches: 75, legRaises: 42, squats: 65},
+      {dag: 17, plank: 90, crunches: 80, legRaises: 45, squats: 65},
+      {dag: 18, plank: 90, crunches: 85, legRaises: 48, squats: 70},
+      {dag: 19, plank: 105, crunches: 90, legRaises: 50, squats: 70},
+      {dag: 20, rust: true},
+      {dag: 21, plank: 105, crunches: 95, legRaises: 52, squats: 75},
+      {dag: 22, plank: 105, crunches: 100, legRaises: 55, squats: 75},
+      {dag: 23, plank: 120, crunches: 105, legRaises: 58, squats: 75},
+      {dag: 24, plank: 120, crunches: 110, legRaises: 60, squats: 80},
+      {dag: 25, rust: true},
+      {dag: 26, plank: 135, crunches: 115, legRaises: 60, squats: 80},
+      {dag: 27, plank: 135, crunches: 120, legRaises: 62, squats: 80},
+      {dag: 28, plank: 150, crunches: 125, legRaises: 62, squats: 85},
+      {dag: 29, plank: 165, crunches: 130, legRaises: 62, squats: 85},
+      {dag: 30, plank: 180, crunches: 135, legRaises: 65, squats: 90},
+    ];
+
+    const container = document.getElementById('challenge');
+
+    days.forEach((d) => {
+      const div = document.createElement('div');
+      div.className = 'day';
+      const isChecked = localStorage.getItem('dag' + d.dag) === 'true';
+      if (isChecked) div.classList.add('completed');
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'checkbox';
+      checkbox.checked = isChecked;
+      checkbox.onchange = () => {
+        localStorage.setItem('dag' + d.dag, checkbox.checked);
+        div.classList.toggle('completed', checkbox.checked);
+      };
+
+      let content = `<strong>Dag ${d.dag}:</strong> `;
+      if (d.rust) {
+        content += 'Rustdag 🧘‍♀️';
+      } else {
+        content += `${d.plank}s planken, ${d.crunches} crunches, ${d.legRaises} leg raises, ${d.squats} squats`;
+      }
+
+      div.innerHTML = content;
+      div.appendChild(checkbox);
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
