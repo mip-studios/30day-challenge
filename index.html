@@ -46,14 +46,23 @@
       font-weight: bold;
     }
     .timer-button, .wake-button {
-      margin: 5px 5px 0 0;
-      padding: 5px 8px;
-      font-size: 0.9em;
+      display: inline-block;
+      margin-top: 8px;
+      margin-right: 8px;
+      padding: 10px 16px;
+      font-size: 1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .timer-button {
       background-color: #007bff;
       color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    }
+    .timer-button:hover {
+      background-color: #0056b3;
     }
     .wake-button {
       background-color: #fff799;
@@ -62,11 +71,8 @@
     .wake-button:hover {
       background-color: #ffef66;
     }
-    .timer-button:hover {
-      background-color: #0056b3;
-    }
     .compliment {
-      margin-top: 8px;
+      margin-top: 10px;
       font-style: italic;
       color: #2c662d;
     }
@@ -77,27 +83,17 @@
   <div class="warning">⚠️ Dit is een testsite – niet bedoeld om serieus thuis te doen of als medisch advies.</div>
   <div id="challenge"></div>
 
-  <!-- Geluidje -->
+  <!-- Geluid -->
   <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
   <script>
     const compliments = [
-      "Goed gedaan!",
-      "Geweldig!",
-      "Ga zo door!",
-      "Kanjer!",
-      "Heb je zeker vaker gedaan 😉",
-      "Jij bent een machine 🔥",
-      "Spieren van staal 💪",
-      "Dit doe je zeker op 1 hand?",
-      "Zelfs je spiegel heeft respect 😎",
-      "Nu al klaar? Olympisch niveau!",
-      "Als motivatie een sport was... jij won goud 🥇",
-      "Je matje is jaloers op je inzet",
-      "Waarschijnlijk heb je dit al in je slaap gedaan 😴",
-      "Je trainer zou trots zijn – als je die nodig had 😜",
-      "Wist je dat deze challenge naar jou is vernoemd?",
-      "Check je abs eens in de spiegel 🪞",
+      "Goed gedaan!", "Geweldig!", "Ga zo door!", "Kanjer!", "Heb je zeker vaker gedaan 😉",
+      "Jij bent een machine 🔥", "Spieren van staal 💪", "Dit doe je zeker op 1 hand?",
+      "Zelfs je spiegel heeft respect 😎", "Nu al klaar? Olympisch niveau!",
+      "Als motivatie een sport was... jij won goud 🥇", "Je matje is jaloers op je inzet",
+      "Waarschijnlijk heb je dit al in je slaap gedaan 😴", "Je trainer zou trots zijn – als je die nodig had 😜",
+      "Wist je dat deze challenge naar jou is vernoemd?", "Check je abs eens in de spiegel 🪞",
       "Kom maar door met dat sixpack! 🍺 (de sportieve dan)"
     ];
 
@@ -121,11 +117,11 @@
       if (wakeLocks[dag]) {
         await wakeLocks[dag].release();
         wakeLocks[dag] = null;
-        button.textContent = "Scherm aan";
+        button.textContent = "Start workout modus";
       } else {
         try {
           wakeLocks[dag] = await navigator.wakeLock.request('screen');
-          button.textContent = "Scherm blijft aan";
+          button.textContent = "Workout modus actief";
         } catch (e) {
           alert("Wake lock werkt niet in deze browser.");
         }
@@ -174,7 +170,7 @@
           await wakeLocks[d.dag].release();
           wakeLocks[d.dag] = null;
           const wakeButton = div.querySelector(".wake-button");
-          if (wakeButton) wakeButton.textContent = "Scherm aan";
+          if (wakeButton) wakeButton.textContent = "Start workout modus";
         }
       };
 
@@ -198,7 +194,7 @@
       if (!d.rust) {
         const wakeBtn = document.createElement("button");
         wakeBtn.className = "wake-button";
-        wakeBtn.textContent = "Scherm aan";
+        wakeBtn.textContent = "Start workout modus";
         wakeBtn.onclick = () => toggleWakeLock(d.dag, wakeBtn);
         div.appendChild(wakeBtn);
       }
