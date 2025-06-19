@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>30 Dagen Buikspier Challenge</title>
+  <title>30 Dagen Challenge</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -22,12 +22,11 @@
       padding: 15px;
       margin-bottom: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
     .day.completed {
       background-color: #d4edda;
-      text-decoration: line-through;
     }
     .checkbox {
       float: right;
@@ -35,12 +34,13 @@
       transform: scale(1.4);
     }
     .timer {
-      margin-top: 8px;
+      display: inline-block;
+      margin-left: 10px;
       font-weight: bold;
     }
     .timer-button {
       margin-left: 10px;
-      padding: 4px 8px;
+      padding: 3px 7px;
       font-size: 0.9em;
       background-color: #007bff;
       color: white;
@@ -51,6 +51,11 @@
     .timer-button:hover {
       background-color: #0056b3;
     }
+    .compliment {
+      margin-top: 8px;
+      font-style: italic;
+      color: #2c662d;
+    }
   </style>
 </head>
 <body>
@@ -58,6 +63,26 @@
   <div id="challenge"></div>
 
   <script>
+    const compliments = [
+      "Goed gedaan!",
+      "Geweldig!",
+      "Ga zo door!",
+      "Kanjer!",
+      "Heb je zeker vaker gedaan 😉",
+      "Jij bent een machine 🔥",
+      "Spieren van staal 💪",
+      "Dit doe je zeker op 1 hand?",
+      "Zelfs je spiegel heeft respect 😎",
+      "Nu al klaar? Olympisch niveau!",
+      "Als motivatie een sport was... jij won goud 🥇",
+      "Je matje is jaloers op je inzet",
+      "Waarschijnlijk heb je dit al in je slaap gedaan 😴",
+      "Je trainer zou trots zijn – als je die nodig had 😜",
+      "Wist je dat deze challenge naar jou is vernoemd?",
+      "Check je abs eens in de spiegel 🪞",
+      "Kom maar door met dat sixpack! 🍺 (de sportieve dan)"
+    ];
+
     const days = [
       {dag: 1, plank: 20, crunches: 15, legRaises: 5, squats: 30},
       {dag: 2, plank: 30, crunches: 20, legRaises: 8, squats: 30},
@@ -88,7 +113,7 @@
       {dag: 27, plank: 135, crunches: 120, legRaises: 62, squats: 80},
       {dag: 28, plank: 150, crunches: 125, legRaises: 62, squats: 85},
       {dag: 29, plank: 165, crunches: 130, legRaises: 62, squats: 85},
-      {dag: 30, plank: 180, crunches: 135, legRaises: 65, squats: 90},
+      {dag: 30, plank: 180, crunches: 135, legRaises: 65, squats: 90}
     ];
 
     const container = document.getElementById('challenge');
@@ -110,38 +135,50 @@
       const div = document.createElement('div');
       div.className = 'day';
       const isChecked = localStorage.getItem('dag' + d.dag) === 'true';
-      if (isChecked) div.classList.add('completed');
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.className = 'checkbox';
       checkbox.checked = isChecked;
+
+      const complimentDiv = document.createElement('div');
+      complimentDiv.className = 'compliment';
+
       checkbox.onchange = () => {
         localStorage.setItem('dag' + d.dag, checkbox.checked);
         div.classList.toggle('completed', checkbox.checked);
+        complimentDiv.textContent = checkbox.checked
+          ? compliments[Math.floor(Math.random() * compliments.length)]
+          : "";
       };
 
-      let content = `<strong>Dag ${d.dag}:</strong> `;
+      let content = `<strong>Dag ${d.dag}</strong><br>`;
       if (d.rust) {
-        content += 'Rustdag 🧘‍♀️';
+        content += `Rustdag 🧘‍♀️`;
       } else {
-        content += `${d.plank}s planken, ${d.crunches} crunches, ${d.legRaises} leg raises, ${d.squats} squats`;
-
-        // Voeg timerknop toe
         if (d.plank) {
           const id = `timer-${d.dag}`;
-          content += ` <button class="timer-button" onclick="startPlank(${d.plank}, '${id}')">Start timer</button> <span class="timer" id="${id}"></span>`;
+          content += `${d.plank}s planken <button class="timer-button" onclick="startPlank(${d.plank}, '${id}')">Start timer</button> <span class="timer" id="${id}"></span><br>`;
         }
+        content += `${d.crunches} crunches<br>`;
+        content += `${d.legRaises} leg raises<br>`;
+        content += `${d.squats} squats`;
       }
 
       div.innerHTML = content;
       div.appendChild(checkbox);
+      div.appendChild(complimentDiv);
+      if (isChecked) {
+        div.classList.add('completed');
+        complimentDiv.textContent = compliments[Math.floor(Math.random() * compliments.length)];
+      }
+
       container.appendChild(div);
     });
 
-    function startPlank(seconden, id) {
+    function startPlank(seconds, id) {
       const display = document.getElementById(id);
-      createTimer(seconden, display);
+      createTimer(seconds, display);
     }
   </script>
 </body>
