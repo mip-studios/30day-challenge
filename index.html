@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <title>30 Dagen Challenge</title>
+  <title>30 Days Workout Challenge</title>
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="30 Dagen Challenge">
+  <meta name="apple-mobile-web-app-title" content="30 Days Workout">
   <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAyFJREFUaEPtmG1R2zAYhq9NXbQDSUcwHaQjpAN0A9kJJB1gOkA6gA5gOkA6SDqADqgTvB45EJKESBAQv/v+85xHkh9kFzZ/Z4AReAksAcvgElgDb4C/4DPwFfgGfgBPwK/gD8jP94Ed8W+1sY3WfHwI/IYDgCgA+Tx2+Jxy8JvBQXgGngK/gScQzJs/Bw4AXuK3pQDYz3YEDcBaPjCzD2BwB/wFfocAUEvJj+cD2P0AFu/gG3gP/Cs/8BjwA3AfOAGuQBA4AlwP3AfeBQ+CvxrnwCvgQ4oAz/gZ+A1oGcFzJbADfA0eA/8F8G1t6iA2wDvgT8V51sA1uG2H9/gH8x8G/i/sAR+BP8k62vJj2cDUA/y9f4BngIXgX/R5wI8gQfwLvgU/M/EtwL49oAPwPvgQ8D32j8AngLPAfcA3N44gGfgV/AccD9ZAXsYAX4F7wGvgM/x9f4D3gKvw/uAzwE8AXwAXAb+S5wGgN3uBHwBvgbvAjgL3I/ABsAE8C64F3gSOH/AD4A/wWcALkF2sQFwA3AXeA5cBd4EvgD/gI/AWeAOcBc4AnztAPgIXAUeB+5B4FPgb+AdsBG4BawBvwGngSvgGfBa4L3AvcBd4BPwN+A0cAF8BaxBF7gIvA+cAU8CrwAvgWfAO+BO4CFwBfgOuAH8Q30APAGeAT8BN4H7gN/AZ+A5cAF4CFwEfgP3gCXgSXAbeB74F3gJvAYeAu8CJwAXgW+An4BzwK/GvAjcAF4E/ga+B58CrwJ3Ad+Bv4JfgA+B94EfgL+BD4FbgGvgFeAp8BbwCPgGfAD8DbwCPgVeA+8C1wCXgK+Bc4CrwE/AZ+Bt4G/gG+BH4AvgbuBp4GPgOeBz4CfgE+B+4GngbvAd8DPwS/BD8CfgQ+Bf4KfgL+Df4Ffgv+Af4O/g/+DPw3+B/g5+R/+f3YAn8k/08cR0LxoA/i9iLgL+j0xWA/xXkXfBf+S/8F+Hj/zR/AF4CzwXg/xXjsw/wKPAxcB14Avgc+A58CfwLPDnOjwBvgT8U5zsAQeBfcAnA9+g3cAR+Af/i13+D/wCWWwA4eQW8kAAAAABJRU5ErkJggg==">
 
   <style>
@@ -82,10 +82,12 @@
     #progress-container { width: 90%; max-width: 600px; margin: 15px auto 5px; background-color: var(--progress-bar-bg); border-radius: 10px; overflow: hidden; height: 20px; }
     #progress-bar { width: 0%; height: 100%; background-color: var(--progress-bar-fill); transition: width 0.5s ease-in-out; }
     #progress-text { text-align: center; font-weight: bold; margin-bottom: 20px; display: block; }
+    /* NIEUW: Copyright styling */
+    footer { text-align: center; margin: 30px 0 20px; font-size: 0.8em; color: var(--text-color); opacity: 0.6; }
   </style>
 </head>
 <body>
-  <h1>30 Dagen Challenge</h1>
+  <h1>30 Days Workout Challenge</h1>
   <h2 class="welcome-message" id="welcome-message"></h2>
   <div id="progress-container"><div id="progress-bar"></div></div>
   <div id="progress-text">0% voltooid</div>
@@ -112,6 +114,8 @@
       </div>
   </div>
 
+  <footer>Mip Studio’s • 2025</footer>
+
   <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
   <script>
@@ -127,10 +131,10 @@
     function handleUserName() {
         let userName = localStorage.getItem('userName');
         if (!userName) {
-            const introText = "Welkom bij de 30 dagen challenge, goed dat je meedoet!\n\nWat is je naam?";
+            // AANGEPAST: Titel van de prompt
+            const introText = "Welkom bij de 30 Days Workout Challenge, goed dat je meedoet!\n\nWat is je naam?";
             userName = prompt(introText, "");
 
-            // === NIEUW: Speciale reactie voor de naam Grace ===
             if (userName && userName.toLowerCase().trim() === 'grace') {
                 alert("Wat een mooie naam Grace, vast net zo mooi als jij ;)");
             }
@@ -146,7 +150,11 @@
 
     async function toggleWakeLock(dag, button) { if (wakeLocks[dag]) { await wakeLocks[dag].release(); wakeLocks[dag] = null; button.textContent = "Start workout modus"; button.style.backgroundColor = ''; } else { try { wakeLocks[dag] = await navigator.wakeLock.request('screen'); button.textContent = "✅ Workout modus actief"; button.style.backgroundColor = '#28a745'; wakeLocks[dag].addEventListener('release', () => { wakeLocks[dag] = null; if (button) { button.textContent = "Start workout modus"; button.style.backgroundColor = ''; } }); } catch (e) { alert("Wake lock wordt niet ondersteund door deze browser of is uitgeschakeld."); } } }
     function startPlank(dag, seconden, id) { if (timers[dag] && timers[dag].interval) clearInterval(timers[dag].interval); const display = document.getElementById(id); const beep = document.getElementById("beep-sound"); let time = seconden; display.textContent = `⏳ ${time}s`; const interval = setInterval(() => { time--; display.textContent = `⏳ ${time}s`; if (time <= 0) { clearInterval(interval); display.textContent = "✅ Klaar!"; beep.play(); timers[dag] = null; } }, 1000); timers[dag] = { interval }; }
-    function renderDay(dayData) { const div = document.createElement('div'); div.className = 'day'; div.id = 'dag-' + dayData.dag; const isCompleted = localStorage.getItem('dag' + dayData.dag) === 'true'; let contentHTML = `<div class="day-content"><strong>Dag ${dayData.dag}</strong>`; if (dayData.rust) { contentHTML += `<br>Rustdag 🧘‍♀️`; } else { contentHTML += `<button id="wakeBtn-${dayData.dag}" class="wake-button-top">Start workout modus</button>`; if (dayData.plank) { const timerId = `timer-${dayData.dag}`; contentHTML += `${dayData.plank}s planken <button class="timer-button" onclick="startPlank(${dayData.dag}, ${dayData.plank}, '${timerId}')">Start timer</button> <span class="timer" id="${timerId}"></span><br>`; } contentHTML += `${dayData.crunches} crunches<br>`; contentHTML += `${dayData.legRaises} leg raises<br>`; contentHTML += `${dayData.squats} squats<br>`; } contentHTML += `</div>`; div.innerHTML = contentHTML; if (!dayData.rust) { const wakeBtn = div.querySelector(`#wakeBtn-${dayData.dag}`); if(wakeBtn) { wakeBtn.onclick = () => toggleWakeLock(dayData.dag, wakeBtn); } } const complimentDiv = document.createElement('div'); complimentDiv.className = 'compliment'; const completeBtn = document.createElement('button'); completeBtn.className = 'action-button complete-button'; const updateButtonState = (completed) => { const userName = localStorage.getItem('userName') || 'Kanjer'; let complimentText = ''; if (completed) { div.classList.add('completed'); completeBtn.classList.add('done'); completeBtn.textContent = '✅ Voltooid!'; if (dayData.dag === 30) { complimentDiv.innerHTML = `<strong>CHALLENGE VOLTOOID!</strong><br> Wat een absolute eindbaas! 30 dagen lang discipline en zweet. Je hebt het gehaald, ${userName}. Wees supertrots op jezelf, rust goed uit, je hebt het verdiend! <img src="https://media.tenor.com/Dyvy_a5a1ggAAAAC/the-rock-bravo.gif" alt="Applaudiserende The Rock">`; } else { if (dayData.rust) { complimentText = restDayCompliments[dayData.complimentIndex]; } else { complimentText = workoutCompliments[dayData.complimentIndex]; } complimentDiv.innerHTML = complimentText.replace(/{{name}}/g, userName); } complimentDiv.style.display = 'block'; } else { div.classList.remove('completed'); completeBtn.classList.remove('done'); completeBtn.textContent = dayData.rust ? 'Rustdag voltooid' : 'Markeer als voltooid'; complimentDiv.innerHTML = ''; complimentDiv.style.display = 'none'; } }; completeBtn.onclick = async () => { const currentState = localStorage.getItem('dag' + dayData.dag) === 'true'; const newState = !currentState; localStorage.setItem('dag' + dayData.dag, newState); updateButtonState(newState); updateProgress(); if (newState && wakeLocks[dayData.dag]) { await wakeLocks[dayData.dag].release(); } }; div.appendChild(completeBtn); div.appendChild(complimentDiv); updateButtonState(isCompleted); return div; }
+    function renderDay(dayData) { const div = document.createElement('div'); div.className = 'day'; div.id = 'dag-' + dayData.dag; const isCompleted = localStorage.getItem('dag' + dayData.dag) === 'true'; let contentHTML = `<div class="day-content"><strong>Dag ${dayData.dag}</strong>`; if (dayData.rust) { contentHTML += `<br>Rustdag 🧘‍♀️`; } else { contentHTML += `<button id="wakeBtn-${dayData.dag}" class="wake-button-top">Start workout modus</button>`; if (dayData.plank) { const timerId = `timer-${dayData.dag}`; contentHTML += `${dayData.plank}s planken <button class="timer-button" onclick="startPlank(${dayData.dag}, ${dayData.plank}, '${timerId}')">Start timer</button> <span class="timer" id="${timerId}"></span><br>`; } contentHTML += `${dayData.crunches} crunches<br>`; contentHTML += `${dayData.legRaises} leg raises<br>`; contentHTML += `${dayData.squats} squats<br>`; } contentHTML += `</div>`; div.innerHTML = contentHTML; if (!dayData.rust) { const wakeBtn = div.querySelector(`#wakeBtn-${dayData.dag}`); if(wakeBtn) { wakeBtn.onclick = () => toggleWakeLock(dayData.dag, wakeBtn); } } const complimentDiv = document.createElement('div'); complimentDiv.className = 'compliment'; const completeBtn = document.createElement('button'); completeBtn.className = 'action-button complete-button'; const updateButtonState = (completed) => { const userName = localStorage.getItem('userName') || 'Kanjer'; let complimentText = ''; if (completed) { div.classList.add('completed'); completeBtn.classList.add('done'); completeBtn.textContent = '✅ Voltooid!'; if (dayData.dag === 30) { 
+        // AANGEPAST: GIF is nu direct ingebed voor betrouwbaarheid
+        const embeddedGif = "data:image/gif;base64,R0lGODlh0ACgAfcAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJBgAoACwAAAAA0ACgAIfYh8FiuEgmAZgkl5LpqdZGuI6r5Lq2i9K92L3O+cIKx/NE6AIAwGBAhIwcODBhUcaDAwUeNHiw4cGDg4gBFJkIokWOkx5BhHixYkCMLV2wZGlS4kGWNWfKjFnTZsuaOXf2/Ak0qNChRIsaPWp0aEilIiNHpEphKkygUqlatWq1q9evYMOKHUu2bNmzaNOqXcu2bdu3cOPKnUu3bt27ePPq3cu3b9+/gAMLHky4sOHDiBMrXsy4sePHkCNLhjo5MubLgC5j5px5M+fPoEOLHk26tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fwIMLH068uPHjyJMrX84cOfLnAQA7";
+        complimentDiv.innerHTML = `<strong>CHALLENGE VOLTOOID!</strong><br> Wat een absolute eindbaas! 30 dagen lang discipline en zweet. Je hebt het gehaald, ${userName}. Wees supertrots op jezelf, rust goed uit, je hebt het verdiend! <img src="${embeddedGif}" alt="Well done!">`; 
+        } else { if (dayData.rust) { complimentText = restDayCompliments[dayData.complimentIndex]; } else { complimentText = workoutCompliments[dayData.complimentIndex]; } complimentDiv.innerHTML = complimentText.replace(/{{name}}/g, userName); } complimentDiv.style.display = 'block'; } else { div.classList.remove('completed'); completeBtn.classList.remove('done'); completeBtn.textContent = dayData.rust ? 'Rustdag voltooid' : 'Markeer als voltooid'; complimentDiv.innerHTML = ''; complimentDiv.style.display = 'none'; } }; completeBtn.onclick = async () => { const currentState = localStorage.getItem('dag' + dayData.dag) === 'true'; const newState = !currentState; localStorage.setItem('dag' + dayData.dag, newState); updateButtonState(newState); updateProgress(); if (newState && wakeLocks[dayData.dag]) { await wakeLocks[dayData.dag].release(); } }; div.appendChild(completeBtn); div.appendChild(complimentDiv); updateButtonState(isCompleted); return div; }
     
     function resetAllProgress() { if (confirm("Weet je zeker dat je alle voortgang en je naam wilt wissen? Dit kan niet ongedaan worden gemaakt.")) { localStorage.clear(); location.reload(); } }
     document.getElementById('reset-btn').addEventListener('click', resetAllProgress);
